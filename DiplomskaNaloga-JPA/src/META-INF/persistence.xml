@@ -5,7 +5,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:/MySqlDS</jta-data-source>
 <!-- 		<class>io.hypersistence.optimizer.forum.domain.Post</class> -->
-		<class>entities.City</class>
+<!-- 		<class>entities.City</class> -->
 		
 	</persistence-unit>
 </persistence>

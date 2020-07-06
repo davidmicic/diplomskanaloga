@@ -16,5 +16,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="var" path="JBOSS/javax/servlet/api/main/jboss-servlet-api_4.0_spec-2.0.0.Final.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiplomskaNaloga-EJB"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiplomskaNaloga-WebFragment"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
