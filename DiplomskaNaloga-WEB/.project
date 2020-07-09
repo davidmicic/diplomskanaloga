@@ -3,7 +3,6 @@
 	<name>DiplomskaNaloga-WEB</name>
 	<comment></comment>
 	<projects>
-		<project>DiplomskaNaloga-WebFragment</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -3,22 +3,24 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.ejb.EJB;
+import javax.annotation.security.DeclareRoles;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import test.CityManagerBean;
-
-@WebServlet("/getDataTest")
+@WebServlet("/admin/getDataTest")
+@DeclareRoles("administrator")
 public class GetDataTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String message;
-	
-	@EJB
-	CityManagerBean cmb;
+
+//	@EJB
+//	CityManagerBean cmb;
+
+//	@Resource
+//	private WebServiceContext context;
 
 	public void init() throws ServletException {
 		message = "Hello World";
@@ -26,13 +28,18 @@ public class GetDataTest extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		cmb.getCities();
 
-		response.setContentType("text/html");
+//		cmb.getCities();
+//		boolean isInRole = context.getContext().isUserInRole("administrator");
+		boolean isInRole = request.isUserInRole("administrator");
 
-		PrintWriter out = response.getWriter();
-		out.println("<h1>" + message + "</h1>");
+		if (isInRole) {
+			response.setContentType("text/html");
 
+			PrintWriter out = response.getWriter();
+			out.println("<h1>" + message + "</h1>");
+		} else {
+			response.setStatus(405);
+		}
 	}
 }
