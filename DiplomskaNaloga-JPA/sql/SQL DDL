@@ -1,0 +1,29 @@
+create table profesor (
+id int not null auto_increment,
+imePriimek varchar(40) not null unique,
+PRIMARY KEY (id)
+);
+
+create table program (
+id int not null auto_increment,
+vrsta varchar(10) not null,
+PRIMARY KEY (id)
+);
+
+create table zavod (
+id int not null auto_increment,
+zavod varchar(40) not null,
+PRIMARY KEY (id)
+);
+
+create table vrstastudija (
+id int not null auto_increment,
+vrsta varchar(20) not null,
+PRIMARY KEY (id)
+);
+
+create table leto (
+id int not null auto_increment,
+leto int not null,
+PRIMARY KEY (id)
+);
