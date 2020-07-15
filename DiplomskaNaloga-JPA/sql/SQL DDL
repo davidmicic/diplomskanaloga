@@ -5,25 +5,25 @@ PRIMARY KEY (id)
 );
 
 create table program (
-id int not null auto_increment,
+id varchar(5) not null unique,
 vrsta varchar(10) not null,
 PRIMARY KEY (id)
 );
 
 create table zavod (
-id int not null auto_increment,
+id int not null unique,
 zavod varchar(40) not null,
 PRIMARY KEY (id)
 );
 
 create table vrstastudija (
-id int not null auto_increment,
+id int not null unique,
 vrsta varchar(20) not null,
 PRIMARY KEY (id)
 );
 
 create table leto (
 id int not null auto_increment,
-leto int not null,
+datum date not null,
 PRIMARY KEY (id)
 );

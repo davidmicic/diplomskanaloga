@@ -1,6 +1,21 @@
 
-// Profesor table insert 
+insert into vrstastudija (id, vrsta) VALUES (0, "REDNO");
+insert into vrstastudija (id, vrsta) VALUES (5, "IZREDNO");
+
+insert into zavod (id, zavod) VALUES (1231, "ŠOLSKI CENTER KRANJ");
+insert into zavod (id, zavod) VALUES (1222, "TEHNIŠKI ŠOLSKI CENTER KRANJ");
+insert into zavod (id, zavod) VALUES (1146, "ESIC");
+
+insert into program (id, vrsta) VALUES ("026", "EKN");
+insert into program (id, vrsta) VALUES ("005", "ENE");
+insert into program (id, vrsta) VALUES ("019", "INF");
+insert into program (id, vrsta) VALUES ("022", "MEH");
+insert into program (id, vrsta) VALUES ("025", "OSM");
+insert into program (id, vrsta) VALUES ("009", "PS");
+insert into program (id, vrsta) VALUES ("035", "VAR");
+
 insert into profesor (imePriimek) VALUES ("Belič Zvonko");
+insert into profesor (imePriimek) VALUES ("Bogataj Ambrož");
 insert into profesor (imePriimek) VALUES ("Jarc Kovačič Branka"); 
 insert into profesor (imePriimek) VALUES ("Mizerit Leon");
 insert into profesor (imePriimek) VALUES ("Debeljak Zdravko");

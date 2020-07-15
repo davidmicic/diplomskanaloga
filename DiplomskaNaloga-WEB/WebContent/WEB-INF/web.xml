@@ -6,6 +6,11 @@
 	<display-name>DiplomskaNaloga-WEB</display-name>
 
 
+	<context-param>
+		<param-name>FilesFolder</param-name>
+		<param-value>/files</param-value>
+	</context-param>
+
 	<security-constraint>
 		<!-- <web-resource-collection> -->
 		<!-- <web-resource-name>administrator</web-resource-name> -->
@@ -60,8 +65,7 @@
 	<servlet>
 		<servlet-name>resteasy-servlet</servlet-name>
 		<servlet-class>
-			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
-		</servlet-class>
+			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
