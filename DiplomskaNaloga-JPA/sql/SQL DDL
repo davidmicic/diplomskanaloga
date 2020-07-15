@@ -27,3 +27,19 @@ id int not null auto_increment,
 datum date not null,
 PRIMARY KEY (id)
 );
+
+CREATE TABLE `diplomskadela` (
+  id int NOT null auto_increment,
+  priimekIme varchar(30) NOT NULL,
+  naslov varchar(255) NOT NULL,
+  datum date not null,
+  id_profesor int NOT NULL,
+  id_zavod varchar(10) not null,
+  id_vrstastudija int not null,
+  id_program varchar(5)  not null,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_profesor) REFERENCES profesor(id),
+  FOREIGN KEY (id_zavod) REFERENCES zavod(id),
+  FOREIGN KEY (id_vrstastudija) REFERENCES vrstastudija(id),
+  FOREIGN KEY (id_program) REFERENCES program(id)
+);
