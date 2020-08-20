@@ -19,8 +19,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import dto.DiplomskoDeloDTO;
-import excel.ExcelManagerBean;
+import dto.DiplomskoDeloExcelDTO;
+import excel.DiplomskoDeloManagerBean;
 
 /**
  * Servlet implementation class UploadExcelFileServlet
@@ -31,7 +31,7 @@ public class UploadExcelFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	ExcelManagerBean emb;
+	DiplomskoDeloManagerBean emb;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,68 +39,48 @@ public class UploadExcelFileServlet extends HttpServlet {
 		try {
 //			boolean userInRole = request.isUserInRole("administrator");
 //			if (userInRole) {
-			Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-			InputStream fileContent = filePart.getInputStream();
-			XSSFWorkbook wb = new XSSFWorkbook(fileContent);
-			int numberOfSheets = wb.getNumberOfSheets();
-			DataFormatter df = new DataFormatter();
-			for (int i = 0; i < numberOfSheets; i++) {
-				XSSFSheet sheet = wb.getSheetAt(i);
-				Iterator<Row> itr = sheet.iterator();
-				while (itr.hasNext()) {
-					Row row = itr.next();
-					Iterator<Cell> cellIterator = row.cellIterator(); // iterating over each column
-					DiplomskoDeloDTO dto = new DiplomskoDeloDTO();
-					int poljeVvrstici = 0;
+				Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+				InputStream fileContent = filePart.getInputStream();
+				XSSFWorkbook wb = new XSSFWorkbook(fileContent);
+				int numberOfSheets = wb.getNumberOfSheets();
+				DataFormatter df = new DataFormatter();
+				for (int i = 0; i < numberOfSheets; i++) {
+					XSSFSheet sheet = wb.getSheetAt(i);
+					Iterator<Row> itr = sheet.iterator();
+					while (itr.hasNext()) {
+						Row row = itr.next();
+						Iterator<Cell> cellIterator = row.cellIterator(); // iterating over each column
+						DiplomskoDeloExcelDTO dto = new DiplomskoDeloExcelDTO();
+						int poljeVvrstici = 0;
 
-					while (cellIterator.hasNext()) {
-						Cell cell = cellIterator.next();
-						switch (poljeVvrstici) {
-						case 1:
-							dto.setImeDijaka(cell.getStringCellValue());
-							break;
-						case 2:
-							dto.setImeDiplome(cell.getStringCellValue());
-							break;
-						case 3:
-							dto.setDatumDiplome(cell.getDateCellValue());
-							break;
-						case 4:
-							dto.setImeProf(cell.getStringCellValue());
-							break;
-						case 5:
-							dto.setVpisnaStevilka(df.formatCellValue(cell));
-							break;
+						while (cellIterator.hasNext()) {
+							Cell cell = cellIterator.next();
+							switch (poljeVvrstici) {
+							case 1:
+								dto.setImeDijaka(cell.getStringCellValue());
+								break;
+							case 2:
+								dto.setImeDiplome(cell.getStringCellValue());
+								break;
+							case 3:
+								dto.setDatumDiplome(cell.getDateCellValue());
+								break;
+							case 4:
+								dto.setImeProf(cell.getStringCellValue());
+								break;
+							case 5:
+								dto.setVpisnaStevilka(df.formatCellValue(cell));
+								break;
+							}
+							poljeVvrstici++;
 						}
-						poljeVvrstici++;
-//							switch (cell.getCellType()) {
-//							case STRING: // field that represents string cell type
-//								System.out.print(cell.getStringCellValue() + "\t\t\t");
-//								break;
-//							case NUMERIC: // field that represents number cell type
-//								System.out.print(cell.getNumericCellValue() + "\t\t\t");
-//								break;
-//							default:
-//							}
+						emb.saveAllDiplomskaDelaToDatabase(dto);
 					}
-					emb.saveDataToDatabase(dto);
 				}
-			}
+//			}
 		} catch (Exception e) {
 			System.out.println("User not logged " + e);
 			response.setStatus(401);
 		}
 	}
-
-	private String extractFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=") + 2, s.length() - 1);
-			}
-		}
-		return "";
-	}
-
 }

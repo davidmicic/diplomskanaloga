@@ -1,58 +1,68 @@
 package dto;
 
-import java.util.Date;
-
 public class DiplomskoDeloDTO {
-	String imeDijaka;
-	String imeDiplome;
-	Date datumDiplome;
-	String imeProf;
-	String vpisnaStevilka;
+	String dijak;
+	String datum;
+	String profesor;
+	String zavod;
+	String program;
+	String vrstaStudija;
+	String naslov;
 
-	public String getImeDijaka() {
-		return imeDijaka;
+	public String getDijak() {
+		return dijak;
 	}
 
-	public void setImeDijaka(String imeDijaka) {
-		this.imeDijaka = imeDijaka;
+	public void setDijak(String dijak) {
+		this.dijak = dijak;
 	}
 
-	public String getImeDiplome() {
-		return imeDiplome;
+	public String getDatum() {
+		return datum;
 	}
 
-	public void setImeDiplome(String imeDiplome) {
-		this.imeDiplome = imeDiplome;
+	public void setDatum(String datum) {
+		this.datum = datum;
 	}
 
-	public Date getDatumDiplome() {
-		return datumDiplome;
+	public String getProfesor() {
+		return profesor;
 	}
 
-	public void setDatumDiplome(Date datumDiplome) {
-		this.datumDiplome = datumDiplome;
+	public void setProfesor(String profesor) {
+		this.profesor = profesor;
 	}
 
-	public String getImeProf() {
-		return imeProf;
+	public String getZavod() {
+		return zavod;
 	}
 
-	public void setImeProf(String imeProf) {
-		this.imeProf = imeProf;
+	public void setZavod(String zavod) {
+		this.zavod = zavod;
 	}
 
-	public String getVpisnaStevilka() {
-		return vpisnaStevilka;
+	public String getProgram() {
+		return program;
 	}
 
-	public void setVpisnaStevilka(String vpisnaStevilka) {
-		this.vpisnaStevilka = vpisnaStevilka;
+	public void setProgram(String program) {
+		this.program = program;
 	}
 
-	@Override
-	public String toString() {
-		return "imeDijaka=" + imeDijaka + ", imeDiplome=" + imeDiplome + ", datumDiplome="
-				+ datumDiplome + ", imeProf=" + imeProf + ", vpisnaStevilka=" + vpisnaStevilka;
+	public String getVrstaStudija() {
+		return vrstaStudija;
+	}
+
+	public void setVrstaStudija(String vrstaStudija) {
+		this.vrstaStudija = vrstaStudija;
+	}
+
+	public String getNaslov() {
+		return naslov;
+	}
+
+	public void setNaslov(String naslov) {
+		this.naslov = naslov;
 	}
 
 }

@@ -19,7 +19,12 @@
 	<classpathentry kind="var" path="JBOSS/javax/annotation/api/main/jboss-annotations-api_1.3_spec-2.0.1.Final.jar"/>
 	<classpathentry kind="var" path="JBOSS/javax/ws/rs/api/main/jboss-jaxrs-api_2.1_spec-2.0.1.Final.jar"/>
 	<classpathentry kind="var" path="JBOSS/javax/xml/ws/api/main/jboss-jaxws-api_2.3_spec-2.0.0.Final.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/poi-4.1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/poi-ooxml-4.1.2.jar"/>
+	<classpathentry kind="lib" path="libs/poi-4.1.2.jar"/>
+	<classpathentry kind="lib" path="libs/poi-ooxml-4.1.2.jar"/>
+	<classpathentry kind="lib" path="libs/json-20180813.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
