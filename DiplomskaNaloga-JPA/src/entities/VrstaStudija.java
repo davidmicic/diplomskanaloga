@@ -13,6 +13,9 @@ public class VrstaStudija {
 	@Column(name = "id", unique = true)
 	private int id;
 
+	@Column(name = "code", unique = true)
+	private String code;
+
 	@Column(name = "vrsta", unique = true)
 	private String vrsta;
 
@@ -24,6 +27,14 @@ public class VrstaStudija {
 		this.id = id;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getVrsta() {
 		return vrsta;
 	}
@@ -31,6 +42,5 @@ public class VrstaStudija {
 	public void setVrsta(String vrsta) {
 		this.vrsta = vrsta;
 	}
-
 
 }

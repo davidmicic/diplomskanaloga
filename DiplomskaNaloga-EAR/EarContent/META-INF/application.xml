@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" version="5">
-  <display-name>DiplomskaNaloga-EAR</display-name>
-  <module>
-    <ejb>DiplomskaNaloga-EJB.jar</ejb>
-  </module>
-  <module>
-    <web>
-      <web-uri>DiplomskaNaloga-WEB.war</web-uri>
-      <context-root>/</context-root>
-    </web>
-  </module>
+<application
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+	version="5">
+	<display-name>DiplomskaNaloga-EAR</display-name>
+	<module>
+		<ejb>DiplomskaNaloga-EJB.jar</ejb>
+	</module>
+	<module>
+		<web>
+			<web-uri>DiplomskaNaloga-WEB.war</web-uri>
+			<context-root>/</context-root>
+		</web>
+	</module>
 </application>
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>get_program</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>add_program</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>get_profesor</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>add_profesor</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>get_zavod</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>add_zavod</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>get_vrstastudija</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>add_vrstastudija</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>get_diplomskadela</role-name> -->
+<!-- 	</security-role> -->
+<!-- 	<security-role> -->
+<!-- 		<description>The single application role</description> -->
+<!-- 		<role-name>add_diplomskadela</role-name> -->
+<!-- 	</security-role> -->

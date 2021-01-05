@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	.container{
+	    display: flex;
+  		justify-content: center;
+	}
+	.positionAbsolute {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%)
+	}
+	.flex {
+		padding: 40px;
+		display: flex;
+		flex-direction: column;
+		width: 240px;
+	}
+</style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Vpis</title>
 </head>
 <body>
-<p><a href="login.html">Try again.</a></p>
+	<div class="positionAbsolute">
+		<img src="files/vss-900.png" />
+		<span class="container">
+		<div>
+			<form method=post action="j_security_check" class="flex">
+				Uporabniško ime:<input style="margin-bottom: 7px; border: 1px solid black" type="text" name="j_username"> 
+				Geslo: <input style="margin-bottom: 7px; border: 1px solid black" type="password" name="j_password">
+				<input type="submit" value="Vpis" />
+			</form>
+			<div style="color: red">NAPAKA PRI VPISU POSKUSITE ZNOVA!</div>
+		</div>
+		</span>
+	</div>
 </body>
 </html>

@@ -20,12 +20,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import dto.DiplomskoDeloExcelDTO;
-import excel.DiplomskoDeloManagerBean;
+import server.DiplomskoDeloManagerBean;
 
 /**
  * Servlet implementation class UploadExcelFileServlet
  */
-@WebServlet("/UploadExcelFileServlet")
+@WebServlet("servlet/UploadExcelFileServlet")
 @MultipartConfig
 public class UploadExcelFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class UploadExcelFileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		try {
+//		try {
 //			boolean userInRole = request.isUserInRole("administrator");
 //			if (userInRole) {
 				Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
@@ -74,13 +74,13 @@ public class UploadExcelFileServlet extends HttpServlet {
 							}
 							poljeVvrstici++;
 						}
-						emb.saveAllDiplomskaDelaToDatabase(dto);
+						emb.saveAllDiplomskaDelaToDatabaseTEST(dto);
 					}
 				}
-//			}
-		} catch (Exception e) {
-			System.out.println("User not logged " + e);
-			response.setStatus(401);
-		}
-	}
+			}
+//		} catch (Exception e) {
+//			System.out.println("User not logged " + e);
+//			response.setStatus(401);
+//		}
+//	}
 }

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "profesor")
 public class Profesor {
-
+	
 	@Id
 	@Column(name = "id", unique = true)
 	private int id;
@@ -31,6 +31,7 @@ public class Profesor {
 	public void setImePriimek(String imePriimek) {
 		this.imePriimek = imePriimek;
 	}
+
 
 
 }

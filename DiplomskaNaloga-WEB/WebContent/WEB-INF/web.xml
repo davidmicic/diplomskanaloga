@@ -21,7 +21,7 @@
 			<url-pattern>/admin/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
-			<role-name>administrator</role-name>
+			<role-name>*</role-name>
 		</auth-constraint>
 		<user-data-constraint>
 			<transport-guarantee>NONE</transport-guarantee>
@@ -29,8 +29,53 @@
 	</security-constraint>
 
 	<security-role>
-		<role-name>administrator</role-name>
+		<description>The single application role</description>
+		<role-name>admin</role-name>
 	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>get_program</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>add_program</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>get_profesor</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>add_profesor</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>get_zavod</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>add_zavod</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>get_vrstastudija</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>add_vrstastudija</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>get_diplomskadela</role-name>
+	</security-role>
+	<security-role>
+		<description>The single application role</description>
+		<role-name>add_diplomskadela</role-name>
+	</security-role>
+	
+<!-- 	<welcome-file-list> -->
+<!-- 		<welcome-file>admin.html</welcome-file> -->
+<!-- 	</welcome-file-list> -->
 
 	<login-config>
 		<auth-method>FORM</auth-method>
@@ -40,47 +85,18 @@
 		</form-login-config>
 	</login-config>
 
-	<!-- restEasy configuration -->
-	<!-- Auto scan REST service -->
-	<context-param>
-		<param-name>resteasy.scan</param-name>
-		<param-value>true</param-value>
-	</context-param>
-
-	<!-- this need same with resteasy servlet url-pattern -->
-	<context-param>
-		<param-name>resteasy.servlet.mapping.prefix</param-name>
-		<param-value>/rest</param-value>
-	</context-param>
-
-	<!-- <listener> -->
-	<!-- <listener-class> -->
-	<!-- org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap -->
-	<!-- </listener-class> -->
-	<!-- </listener> -->
-
-	<!-- nisem siguren kaj točno to zgoraj naredi, resteasy dela tut brez tega.. -->
-	<!-- na tem linku sm najdu konfiguracijo: https://www.dogtagpki.org/wiki/RESTEasy_Configuration -->
-
-	<servlet>
-		<servlet-name>resteasy-servlet</servlet-name>
-		<servlet-class>
-			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>resteasy-servlet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
+	    <servlet-name>javax.ws.rs.core.Application</servlet-name>
+	    <url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	<!-- restEasy configuration end -->
-
-
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
 
 	<error-page>
 		<error-code>404</error-code>
+		<location>/index.html</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>403</error-code>
 		<location>/index.html</location>
 	</error-page>
 </web-app>

@@ -1,18 +1,18 @@
 
-insert into vrstastudija (id, vrsta) VALUES (0, "REDNO");
-insert into vrstastudija (id, vrsta) VALUES (5, "IZREDNO");
+insert into vrstastudija (code, vrsta) VALUES ("0", "REDNO");
+insert into vrstastudija (code, vrsta) VALUES ("5", "IZREDNO");
 
-insert into zavod (id, zavod) VALUES (1231, "ŠOLSKI CENTER KRANJ");
-insert into zavod (id, zavod) VALUES (1222, "TEHNIŠKI ŠOLSKI CENTER KRANJ");
-insert into zavod (id, zavod) VALUES (1146, "ESIC");
+insert into zavod (code, zavod) VALUES ("1231", "ŠOLSKI CENTER KRANJ");
+insert into zavod (code, zavod) VALUES ("1222", "TEHNIŠKI ŠOLSKI CENTER KRANJ");
+insert into zavod (code, zavod) VALUES ("1146", "ESIC");
 
-insert into program (id, vrsta) VALUES ("026", "EKN");
-insert into program (id, vrsta) VALUES ("005", "ENE");
-insert into program (id, vrsta) VALUES ("019", "INF");
-insert into program (id, vrsta) VALUES ("022", "MEH");
-insert into program (id, vrsta) VALUES ("025", "OSM");
-insert into program (id, vrsta) VALUES ("009", "PS");
-insert into program (id, vrsta) VALUES ("035", "VAR");
+insert into program (code, vrsta) VALUES ("026", "EKN");
+insert into program (code, vrsta) VALUES ("005", "ENE");
+insert into program (code, vrsta) VALUES ("019", "INF");
+insert into program (code, vrsta) VALUES ("022", "MEH");
+insert into program (code, vrsta) VALUES ("025", "OSM");
+insert into program (code, vrsta) VALUES ("009", "PS");
+insert into program (code, vrsta) VALUES ("035", "VAR");
 
 insert into profesor (imePriimek) VALUES ("Belič Zvonko");
 insert into profesor (imePriimek) VALUES ("Bogataj Ambrož");
@@ -77,3 +77,4 @@ insert into profesor (imePriimek) VALUES ("Grmek Košnik Irena");
 insert into profesor (imePriimek) VALUES ("Šenk Ileršič Ivanka"); 
 insert into profesor (imePriimek) VALUES ("Grünfeld Tanja");
 insert into profesor (imePriimek) VALUES ("Kovačik Anita");
+insert into profesor (imePriimek) VALUES ("Žun Štefan");

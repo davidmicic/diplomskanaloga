@@ -5,19 +5,22 @@ PRIMARY KEY (id)
 );
 
 create table program (
-id varchar(5) not null unique,
+id int not null unique auto_increment,
+code varchar(5) not null unique,
 vrsta varchar(10) not null,
 PRIMARY KEY (id)
 );
 
 create table zavod (
-id int not null unique,
+id int not null unique auto_increment,
+code varchar(5) not null,
 zavod varchar(40) not null,
 PRIMARY KEY (id)
 );
 
 create table vrstastudija (
-id int not null unique,
+id int not null unique auto_increment,
+code varchar(5) not null,
 vrsta varchar(20) not null,
 PRIMARY KEY (id)
 );

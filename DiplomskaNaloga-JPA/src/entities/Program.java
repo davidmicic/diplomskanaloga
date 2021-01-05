@@ -11,17 +11,28 @@ public class Program {
 
 	@Id
 	@Column(name = "id", unique = true)
-	private String id;
+	private int id;
+
+	@Column(name = "code", unique = true)
+	private String code;
 
 	@Column(name = "vrsta", unique = true)
 	private String vrsta;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getVrsta() {
