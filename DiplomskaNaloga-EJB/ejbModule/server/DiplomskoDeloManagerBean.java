@@ -130,7 +130,7 @@ public class DiplomskoDeloManagerBean {
 	@SuppressWarnings("unchecked")
 	public List<Date> getDiplomskaDelaLetoIzdelave() throws ParseException {
 
-		Query query = em.createQuery("select DISTINCT year(dd.datum) from DiplomskaDela dd order by dd.datum desc");
+		Query query = em.createQuery("select DISTINCT year(dd.datum) from DiplomskaDela dd order by year(dd.datum) desc");
 		List<Date> listDD = query.getResultList();
 		return listDD;
 	}
