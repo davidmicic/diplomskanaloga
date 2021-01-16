@@ -1,0 +1,24 @@
+embed-server --std-out=echo --server-config=standalone.xml
+
+# batch
+
+module add --name=com.mysql --resources=/tmp/mysql-connector-java-8.0.20.jar --dependencies=javax.api,javax.transaction.api
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-class-name=com.mysql.jdbc.Driver)
+
+# add new datasource
+/subsystem=datasources/data-source=${env.DS_NAME}/:add(jta=true,connection-url=jdbc:mysql://${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME},driver-name=mysql,jndi-name=${env.JNDI_NAME},initial-pool-size=4,max-pool-size=64,min-pool-size=4,password=admin,user-name=admin)
+
+# add security domain for internal
+/subsystem=security/security-domain=propertiesLogin:add(cache-type=default)
+/subsystem=security/security-domain=propertiesLogin/authentication=classic:add()
+/subsystem=security/security-domain=propertiesLogin/authentication=classic/login-module=Database:add( \
+  code=org.jboss.security.auth.spi.UMCommonNumberLdapLoginModule, \
+  module=si.lucis.security.common, \
+  flag=optional, \
+  module-options=[ \
+    "dsJndiName"=>"java:/MySqlDS", \
+    "principalsQuery"=>"select password from uporabnik u where u.username=?", \
+    "rolesQuery"=>"select ime, 'Roles' from `role` as r2 inner join uporabnik_role as ur on ur.id_role = r2.id where ur.username=?", \
+  ])
+
+stop-embedded-server
