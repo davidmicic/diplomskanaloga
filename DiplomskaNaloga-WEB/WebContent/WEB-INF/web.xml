@@ -73,9 +73,9 @@
 		<role-name>add_diplomskadela</role-name>
 	</security-role>
 	
-<!-- 	<welcome-file-list> -->
-<!-- 		<welcome-file>admin.html</welcome-file> -->
-<!-- 	</welcome-file-list> -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 	<login-config>
 		<auth-method>FORM</auth-method>

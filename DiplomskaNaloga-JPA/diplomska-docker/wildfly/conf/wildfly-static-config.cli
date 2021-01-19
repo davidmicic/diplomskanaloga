@@ -12,9 +12,8 @@ module add --name=com.mysql --resources=/tmp/mysql-connector-java-8.0.20.jar --d
 /subsystem=security/security-domain=propertiesLogin:add(cache-type=default)
 /subsystem=security/security-domain=propertiesLogin/authentication=classic:add()
 /subsystem=security/security-domain=propertiesLogin/authentication=classic/login-module=Database:add( \
-  code=org.jboss.security.auth.spi.UMCommonNumberLdapLoginModule, \
-  module=si.lucis.security.common, \
-  flag=optional, \
+  code=org.jboss.security.auth.spi.DatabaseServerLoginModule, \
+  flag=required, \
   module-options=[ \
     "dsJndiName"=>"java:/MySqlDS", \
     "principalsQuery"=>"select password from uporabnik u where u.username=?", \
