@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -41,8 +43,7 @@ public class PDFServlet extends HttpServlet {
 	
 	@EJB
 	DiplomskoDeloManagerBean diplomskoDeloManagerBean;
-	
-       
+	private static final Logger LOGGER = Logger.getLogger( PDFServlet.class.getName() );
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -51,9 +52,12 @@ public class PDFServlet extends HttpServlet {
 
         	diplomskoDeloManagerBean.getAllDiplomskaDela();
         	
-        	String configPath = System.getProperty("jboss.home.dir") + "\\fop\\config.xml";
-			String templatePath = System.getProperty("jboss.home.dir") + "\\fop\\template.xsl";
-			String filePath = System.getProperty("jboss.home.dir") + "\\fop\\Employee.xml";
+        	String configPath = System.getProperty("jboss.home.dir") + "/fop/config.xml";
+			String templatePath = System.getProperty("jboss.home.dir") + "/fop/template.xsl";
+			String filePath = System.getProperty("jboss.home.dir") + "/fop/Employee.xml";
+			
+			LOGGER.log( Level.INFO, "CONFIG XML PATH: " + configPath );
+			
 
         	File xconf = new File(configPath); 
         	FopConfParser parser = new FopConfParser(xconf); //parsing configuration  

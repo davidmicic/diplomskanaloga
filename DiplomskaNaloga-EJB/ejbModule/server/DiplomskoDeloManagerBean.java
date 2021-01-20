@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,26 +28,26 @@ import entities.Zavod;
 
 @Stateless
 public class DiplomskoDeloManagerBean {
-
+	private static final Logger LOGGER = Logger.getLogger(DiplomskoDeloManagerBean.class.getName());
 	@PersistenceContext(unitName = "DiplomskaNaloga-JPA")
 	protected EntityManager em;
-	
+
 	private static List<Integer> staticVrste;
 	private static List<Integer> staticPrograms;
 	private static List<Integer> staticZavods;
 	private static List<Integer> staticProfesors;
 	private static String staticLeto;
-	
+
 	@SuppressWarnings("unchecked")
 	public List<DiplomskoDeloDTO> getDiplomskaDelaByPage(List<Integer> programs, List<Integer> zavods,
 			List<Integer> vrste, List<Integer> profesors, String leto, int page) throws ParseException {
-		
+
 		staticVrste = vrste;
 		staticPrograms = programs;
 		staticZavods = zavods;
 		staticProfesors = profesors;
 		staticLeto = leto;
-		
+
 		Query qry = generateQuery(programs, zavods, vrste, profesors, leto);
 
 		int valueFrom = page * 30 - 30;
@@ -54,10 +56,10 @@ public class DiplomskoDeloManagerBean {
 		List<DiplomskaDela> listDD = qry.getResultList();
 
 		List<DiplomskoDeloDTO> dtoList = fromEntityToDTO(listDD);
-		
+
 		return dtoList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void getAllDiplomskaDela() throws ParseException {
 		Query qry = generateQuery(staticPrograms, staticZavods, staticVrste, staticProfesors, staticLeto);
@@ -65,8 +67,9 @@ public class DiplomskoDeloManagerBean {
 		List<DiplomskaDela> listDD = qry.getResultList();
 
 		List<DiplomskoDeloDTO> dtoList = fromEntityToDTO(listDD);
-		
+
 		try {
+		
 			generatePDFDataXMLFile(dtoList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -79,6 +82,8 @@ public class DiplomskoDeloManagerBean {
 		for (DiplomskaDela dd : listDD) {
 			DiplomskoDeloDTO dto = new DiplomskoDeloDTO();
 			dto.setDijak(dd.getPriimekIme());
+			
+			LOGGER.log(Level.INFO, "WRITING TO PDF: " + dd.getProfesor().getImePriimek());
 
 			SimpleDateFormat dt1 = new SimpleDateFormat("dd.MM.yyyy");
 			dto.setDatum(dt1.format(dd.getDatum()));
@@ -95,7 +100,7 @@ public class DiplomskoDeloManagerBean {
 
 	private Query generateQuery(List<Integer> programs, List<Integer> zavods, List<Integer> vrste,
 			List<Integer> profesors, String leto) {
-		
+
 		if (programs.size() == 0) {
 			programs = null;
 		}
@@ -108,11 +113,9 @@ public class DiplomskoDeloManagerBean {
 		if (profesors.size() == 0) {
 			profesors = null;
 		}
-		
-		String qryString = "select dd from DiplomskaDela dd where 1=1" 
-				+ " and dd.program.id IN (:programs) "
-				+ " and dd.zavod.id IN (:zavods)"
-				+ " and dd.vrstastudija.id IN (:vrste)"
+
+		String qryString = "select dd from DiplomskaDela dd where 1=1" + " and dd.program.id IN (:programs) "
+				+ " and dd.zavod.id IN (:zavods)" + " and dd.vrstastudija.id IN (:vrste)"
 				+ " and dd.profesor.id IN (:profesors)";
 
 		if (leto != null) {
@@ -130,7 +133,8 @@ public class DiplomskoDeloManagerBean {
 	@SuppressWarnings("unchecked")
 	public List<Date> getDiplomskaDelaLetoIzdelave() throws ParseException {
 
-		Query query = em.createQuery("select DISTINCT year(dd.datum) from DiplomskaDela dd order by year(dd.datum) desc");
+		Query query = em
+				.createQuery("select DISTINCT year(dd.datum) from DiplomskaDela dd order by year(dd.datum) desc");
 		List<Date> listDD = query.getResultList();
 		return listDD;
 	}
@@ -152,16 +156,13 @@ public class DiplomskoDeloManagerBean {
 			profesors = null;
 		}
 
-		String qryString = "select dd from DiplomskaDela dd where 1=1" 
-				+ " and dd.program.id IN (:programs) "
-				+ " and dd.zavod.id IN (:zavods)"
-				+ " and dd.vrstastudija.id IN (:vrste)"
+		String qryString = "select dd from DiplomskaDela dd where 1=1" + " and dd.program.id IN (:programs) "
+				+ " and dd.zavod.id IN (:zavods)" + " and dd.vrstastudija.id IN (:vrste)"
 				+ " and dd.profesor.id IN (:profesors)";
 
 		if (leto != null) {
 			qryString += " and YEAR(dd.datum) = " + "\'" + leto + "\'";
 		}
-
 
 		Query qry = em.createQuery(qryString, DiplomskaDela.class);
 		qry.setParameter("programs", programs);
@@ -196,7 +197,7 @@ public class DiplomskoDeloManagerBean {
 			Query q3 = em.createQuery("select z from Zavod z where z.code = :code");
 			q3.setParameter("code", zavodStevilka);
 			Zavod zavod = (Zavod) q3.getSingleResult();
-			
+
 			dd.setPriimekIme(dto.getImeDijaka());
 			dd.setNaslov(dto.getImeDiplome());
 			dd.setProfesor(profesor);
@@ -208,25 +209,25 @@ public class DiplomskoDeloManagerBean {
 			em.persist(dd);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<String> search(String search) {
-		Query qry = em.createNativeQuery("select priimekIme from diplomskadela d where MATCH(priimekIme)" + 
-				" AGAINST ('" + search + "*' IN BOOLEAN MODE)");
-		
+		Query qry = em.createNativeQuery("select priimekIme from diplomskadela d where MATCH(priimekIme)"
+				+ " AGAINST ('" + search + "*' IN BOOLEAN MODE)");
+
 		List<String> searchStrings = qry.getResultList();
 		return searchStrings;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<DiplomskoDeloDTO> getDiplomskoDeloByName(String priimekIme) {
 		Query qry = em.createQuery("select d from DiplomskaDela d where d.priimekIme = :priimekIme");
 		qry.setParameter("priimekIme", priimekIme);
-		
+
 		List<DiplomskoDeloDTO> listToReturn = new ArrayList<DiplomskoDeloDTO>();
-		
+
 		List<DiplomskaDela> listDD = qry.getResultList();
-		for(DiplomskaDela dd : listDD) {
+		for (DiplomskaDela dd : listDD) {
 			DiplomskoDeloDTO dto = new DiplomskoDeloDTO();
 			SimpleDateFormat dt1 = new SimpleDateFormat("dd.MM.yyyy");
 			dto.setDatum(dt1.format(dd.getDatum()));
@@ -239,10 +240,10 @@ public class DiplomskoDeloManagerBean {
 			dto.setId(dd.getId());
 			listToReturn.add(dto);
 		}
-		
+
 		return listToReturn;
 	}
-	
+
 	public int updateDiplomskoDeloById(DiplomskoDeloDTO dto) {
 		Integer id = dto.getId();
 		String datum = dto.getDatum();
@@ -253,31 +254,31 @@ public class DiplomskoDeloManagerBean {
 
 		DiplomskaDela dd = em.find(DiplomskaDela.class, id);
 
-		if(datum != null) {
+		if (datum != null) {
 			SimpleDateFormat dt1 = new SimpleDateFormat("dd.MM.yyyy");
 			dto.setDatum(dt1.format(dd.getDatum()));
 		}
-		if(naslov != null) {
+		if (naslov != null) {
 			dd.setNaslov(naslov);
 		}
-		if(profesor != null) {
+		if (profesor != null) {
 			Profesor prof = (Profesor) em.createQuery("select p from Profesor p where p.imePriimek = :imePriimek")
 					.setParameter("imePriimek", profesor).getSingleResult();
 			dd.setProfesor(prof);
 		}
 		String program = dto.getProgram();
-		if(program != null) {
-			
+		if (program != null) {
+
 			Program prog = (Program) em.createQuery("select p from Program p where p.vrsta = :vrsta")
 					.setParameter("vrsta", program).getSingleResult();
 			dd.setProgram(prog);
 		}
-		if(vrstaStudija != null) {
+		if (vrstaStudija != null) {
 			VrstaStudija vs = (VrstaStudija) em.createQuery("select vs from VrstaStudija vs where vs.vrsta = :vrsta")
 					.setParameter("vrsta", vrstaStudija).getSingleResult();
 			dd.setVrstastudija(vs);
 		}
-		if(zavod != null) {
+		if (zavod != null) {
 			Zavod z = (Zavod) em.createQuery("select z from Zavod z where z.zavod = :zavod")
 					.setParameter("zavod", zavod).getSingleResult();
 			dd.setZavod(z);
@@ -285,13 +286,16 @@ public class DiplomskoDeloManagerBean {
 		em.persist(dd);
 		return dd.getId();
 	}
-	
+
 	private void generatePDFDataXMLFile(List<DiplomskoDeloDTO> dtoList) throws IOException {
+
+		LOGGER.log(Level.INFO, "WRITING TO PDF XML");
+
 		String xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 		xmlString += "<diplomskaDela>";
-		
+
 		int count = 0;
-		for(DiplomskoDeloDTO dto : dtoList) {
+		for (DiplomskoDeloDTO dto : dtoList) {
 			count++;
 			xmlString += "<diplomskoDelo>";
 			xmlString += String.format("<dijak>%s</dijak>", dto.getDijak());
@@ -304,16 +308,16 @@ public class DiplomskoDeloManagerBean {
 			xmlString += "<id>" + count + "</id>";
 			xmlString += "</diplomskoDelo>";
 		}
-		
+
 		xmlString += "</diplomskaDela>";
 //		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-		String path = System.getProperty("jboss.home.dir");
-		File file = new File(path + "\\fop\\Employee.xml");
-		 FileWriter fw = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(xmlString);
-        bw.close();
-		
+		String filePath = System.getProperty("jboss.home.dir") + "/fop/Employee.xml";
+		File file = new File(filePath);
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(xmlString);
+		bw.close();
+
 	}
 
 }

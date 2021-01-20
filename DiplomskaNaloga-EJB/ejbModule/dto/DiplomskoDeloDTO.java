@@ -90,4 +90,10 @@ public class DiplomskoDeloDTO {
 		this.naslov = naslov;
 	}
 
+	@Override
+	public String toString() {
+		return "DiplomskoDeloDTO [dijak=" + dijak + ", datum=" + datum + ", profesor=" + profesor + ", zavod=" + zavod
+				+ ", program=" + program + ", vrstaStudija=" + vrstaStudija + ", naslov=" + naslov + ", id=" + id + "]";
+	}
+	
 }

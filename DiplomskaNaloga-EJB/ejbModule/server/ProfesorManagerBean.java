@@ -31,7 +31,7 @@ public class ProfesorManagerBean extends AManager{
 	}
 	
 	public List<String> search(String search) {
-		Query qry = em.createNativeQuery("select imePriimek from Profesor p where MATCH(imePriimek)" + 
+		Query qry = em.createNativeQuery("select imePriimek from profesor p where MATCH(imePriimek)" + 
 				" AGAINST ('" + search + "*' IN BOOLEAN MODE)");
 		
 		List<String> searchStrings = qry.getResultList();

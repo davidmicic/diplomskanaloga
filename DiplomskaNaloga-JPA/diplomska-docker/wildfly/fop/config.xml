@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Arial Unicode only -->
+<fop version="1.0">
+
+  <!-- Base URL for resolving relative URLs -->
+  <base>.</base>  
+  <renderers>
+   <renderer mime="application/pdf">
+		<fonts>                           
+			 <font kerning="yes" embed-url="file://opt/jboss/wildfly/fop/Roboto/Roboto-Regular.ttf">
+				<font-triplet name="Roboto" style="normal" weight="normal"/>
+			 </font>                     
+		</fonts>
+   </renderer>
+</renderers>
+
+</fop>

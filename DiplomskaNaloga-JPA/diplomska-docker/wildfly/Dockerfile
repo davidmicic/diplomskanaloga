@@ -9,6 +9,7 @@ ENV JBOSS_HOME /opt/jboss/wildfly
 
 ADD ./jar/mysql-connector-java-8.0.20.jar /tmp/mysql-connector-java-8.0.20.jar
 ADD ./conf/wildfly-static-config.cli /tmp/wildfly-static-config.cli
+ADD ./fop  /opt/jboss/wildfly/fop
 
 # Copy EAR file
 COPY --chown=jboss:0 ./ear/*.ear ${JBOSS_HOME}/standalone/deployments/
