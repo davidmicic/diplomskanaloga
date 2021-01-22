@@ -111,4 +111,13 @@ public class DiplomskaDela {
 		this.program = program;
 	}
 
+	@Override
+	public String toString() {
+		return "DiplomskaDela [id=" + id + ", priimekIme=" + priimekIme + ", naslov=" + naslov + ", datum=" + datum
+				+ ", zavod=" + zavod + ", profesor=" + profesor + ", vrstastudija=" + vrstastudija + ", program="
+				+ program + "]";
+	}
+
+	
+	
 }

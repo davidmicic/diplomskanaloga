@@ -7,7 +7,7 @@
   <renderers>
    <renderer mime="application/pdf">
 		<fonts>                           
-			 <font kerning="yes" embed-url="file://opt/jboss/wildfly/fop/Roboto/Roboto-Regular.ttf">
+			 <font kerning="yes" embed-url="file:///opt/jboss/wildfly/fop/Roboto/Roboto-Regular.ttf">
 				<font-triplet name="Roboto" style="normal" weight="normal"/>
 			 </font>                     
 		</fonts>

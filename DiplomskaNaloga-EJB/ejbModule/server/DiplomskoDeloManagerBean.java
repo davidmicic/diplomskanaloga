@@ -83,7 +83,7 @@ public class DiplomskoDeloManagerBean {
 			DiplomskoDeloDTO dto = new DiplomskoDeloDTO();
 			dto.setDijak(dd.getPriimekIme());
 			
-			LOGGER.log(Level.INFO, "WRITING TO PDF: " + dd.getProfesor().getImePriimek());
+			LOGGER.log(Level.INFO, "WRITING TO PDF: " + dd.toString());
 
 			SimpleDateFormat dt1 = new SimpleDateFormat("dd.MM.yyyy");
 			dto.setDatum(dt1.format(dd.getDatum()));

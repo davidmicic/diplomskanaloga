@@ -17,9 +17,17 @@ COPY --chown=jboss:0 ./ear/*.ear ${JBOSS_HOME}/standalone/deployments/
 #change ownership
 USER root
 
+
+RUN localedef -i sl_SI -f UTF-8 sl_SI.UTF-8
+RUN echo "LANG=\"sl_SI.UTF-8\"" > /etc/locale.conf
+
 RUN chown jboss:0 -R ${JBOSS_HOME}/standalone/configuration/ 
 
 USER jboss
+
+ENV LANG sl_SI.UTF-8
+ENV LANGUAGE sl_SI.UTF-8
+ENV LC_ALL sl_SI.UTF-8
 
 # run config
 RUN cp ${JBOSS_HOME}/standalone/configuration/standalone-full.xml ${JBOSS_HOME}/standalone/configuration/standalone.xml

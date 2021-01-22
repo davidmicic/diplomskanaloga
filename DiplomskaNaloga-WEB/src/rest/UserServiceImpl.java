@@ -80,7 +80,7 @@ public class UserServiceImpl extends AManager {
 		String rolename = userRole.getRole();
 		
 		
-		Role role = (Role) em.createNativeQuery("select * from Role where ime = :rolename", Role.class).setParameter("rolename", rolename).getSingleResult();
+		Role role = (Role) em.createNativeQuery("select * from role where ime = :rolename", Role.class).setParameter("rolename", rolename).getSingleResult();
 		
 		Query query = em.createNativeQuery("delete from uporabnik_role where username = :username and id_role = :roleId");
 		query.setParameter("username", username);
